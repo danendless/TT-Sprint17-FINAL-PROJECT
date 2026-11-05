@@ -43,6 +43,20 @@ These results demonstrate the predictive value of combining historical temperatu
 
 However, the results reflect performance on historical data. Real-world deployment would require further validation of feature availability at prediction time, operational reliability, and generalization to future production conditions.
 
+### Potential Operational Impact
+
+The proposed model could serve as a virtual temperature sensor during secondary steel refining, providing temperature estimates based on previously recorded measurements and process events.
+
+As an initial deployment strategy, the model should operate alongside conventional temperature measurements to validate its reliability under real operating conditions. Its application could subsequently be evaluated for process conditions adequately represented in the training data, particularly intervals containing electrode heating cycles.
+
+The historical dataset contains **15,907 temperature measurements across 3,216 steel batches**, averaging approximately **4.95 measurements per batch**.
+
+Under a hypothetical scenario in which one manual temperature measurement per batch could safely be replaced by a model-generated estimate, the number of manual measurements would decrease by approximately **20.2%**.
+
+Such a reduction could potentially improve operational efficiency and reduce measurement-related costs. However, the actual benefits cannot be quantified with the available data, as measurement costs, operational constraints, and the metallurgical consequences of replacing measurements are unknown.
+
+Further validation would therefore be necessary before considering the model suitable for replacing conventional temperature measurements.
+
 ## Project Objectives
 
 - Explore and evaluate the quality of industrial process data.
@@ -98,7 +112,6 @@ The project investigates several regression algorithms:
 - **Persistence model** — baseline using the previous temperature measurement.
 - **Ridge Regression** — regularized linear regression.
 - **LightGBM** — gradient-boosted decision trees.
-- **XGBoost** — gradient-boosted decision trees.
 - **CatBoost** — gradient-boosted decision trees.
 
 Model development includes cross-validation, hyperparameter tuning, and evaluation on held-out data.
@@ -118,6 +131,9 @@ Detailed experimental results and conclusions are presented in the notebooks.
 TT-Sprint17-FINAL-PROJECT/
 ├── README.md
 ├── environment.yaml
+├── assets/
+│   └── figures/
+│       └── model_diagnostics.png
 ├── data/
 │   ├── data_arc_en.csv
 │   ├── data_bulk_en.csv
@@ -200,6 +216,7 @@ It is not presented as a validated production-ready control system. Deployment w
 
 ## Author
 
-Developed as the final project of the TripleTen Data Science Bootcamp.
+Developed by **Daniel Endless** as the final project
+of the TripleTen Data Science Bootcamp.
 
-The repository demonstrates applied data analysis, time-aware feature engineering, regression modeling, model evaluation, and technical documentation.
+[GitHub Profile](https://github.com/danendless)
