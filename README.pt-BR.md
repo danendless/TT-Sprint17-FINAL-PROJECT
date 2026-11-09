@@ -1,135 +1,139 @@
-# Steelproof — Steel Temperature Prediction
+[English](README.md) | [Português (Brasil)](README.pt-BR.md)
 
-**TripleTen Data Science Bootcamp | Final Project — Sprint 17**
+# Steelproof — Predição da Temperatura do Aço
 
-## Project Overview
+**Bootcamp de Ciência de Dados da TripleTen | Projeto Final — Sprint 17**
 
-This project explores the application of machine learning to predict molten steel temperatures during secondary steel refining.
+## Visão Geral do Projeto
 
-Steel temperature control is an important part of the refining process. Accurate temperature estimates can help operators make informed decisions about heating cycles, energy consumption, and process efficiency.
+Este projeto explora a aplicação de aprendizado de máquina para prever a temperatura do aço líquido durante o refino secundário.
 
-The objective is to develop a regression model capable of estimating steel temperature using historical temperature measurements and operational data, including electrode heating cycles and material additions.
+O controle da temperatura do aço é uma parte importante do processo de refino. Estimativas precisas de temperatura podem ajudar os operadores a tomar decisões fundamentadas sobre os ciclos de aquecimento, o consumo de energia e a eficiência do processo.
 
-The proposed solution serves as a preliminary **virtual temperature sensor**, using available process measurements to estimate subsequent steel temperatures.
+O objetivo é desenvolver um modelo de regressão capaz de estimar a temperatura do aço com base em medições históricas de temperatura e dados operacionais, incluindo ciclos de aquecimento por eletrodos e adições de materiais.
 
-## Results
+A solução proposta funciona como um **sensor virtual de temperatura** preliminar, utilizando medições disponíveis do processo para estimar temperaturas subsequentes do aço.
 
-**CatBoost achieved the best cross-validation performance**, with a Mean Absolute Error (MAE) of 4.04 °C and a Root Mean Squared Error (RMSE) of 5.82 °C.
+## Resultados
 
-On the held-out test set, CatBoost achieved an MAE of **3.93 °C** and an RMSE of **5.59 °C**, reducing prediction errors by approximately 59% and 58%, respectively, compared with the persistence baseline.
+**O CatBoost apresentou o melhor desempenho na validação cruzada**, com erro absoluto médio (MAE) de 4,04 °C e raiz do erro quadrático médio (RMSE) de 5,82 °C.
 
-### Model Performance Comparison
+No conjunto de teste reservado, o CatBoost obteve MAE de **3,93 °C** e RMSE de **5,59 °C**, reduzindo os erros de previsão em aproximadamente 59% e 58%, respectivamente, em comparação com o modelo de persistência.
 
-| Model | CV MAE (°C) | CV RMSE (°C) | Test MAE (°C) | Test RMSE (°C) |
+### Comparação de Desempenho dos Modelos
+
+| Modelo | MAE — Validação Cruzada (°C) | RMSE — Validação Cruzada (°C) | MAE — Teste (°C) | RMSE — Teste (°C) |
 |---|---:|---:|---:|---:|
-| **CatBoost** | **4.04** | **5.82** | **3.93** | **5.59** |
-| LightGBM | 4.18 | 6.09 | — | — |
-| Random Forest | 4.42 | 6.42 | — | — |
-| Ridge | 4.30 | 6.38 | — | — |
-| Persistence | 8.96 | 12.38 | 9.64 | 13.23 |
-| Dummy | 11.79 | 16.97 | — | — |
+| **CatBoost** | **4,04** | **5,82** | **3,93** | **5,59** |
+| LightGBM | 4,18 | 6,09 | — | — |
+| Random Forest | 4,42 | 6,42 | — | — |
+| Ridge | 4,30 | 6,38 | — | — |
+| Persistência | 8,96 | 12,38 | 9,64 | 13,23 |
+| Dummy | 11,79 | 16,97 | — | — |
 
-*Cross-validation metrics were calculated on the training data. The held-out test set was evaluated only for the selected CatBoost model and the persistence baseline. Dashes indicate models not evaluated on the test set.*
+*As métricas de validação cruzada foram calculadas a partir dos dados de treinamento. O conjunto de teste reservado foi utilizado apenas para avaliar o modelo CatBoost selecionado e o modelo de persistência. Os traços indicam modelos não avaliados no conjunto de teste.*
 
-### Actual vs. Predicted Temperatures and Cross-Validation Model Comparison
+### Temperaturas Reais vs. Previstas e Comparação dos Modelos na Validação Cruzada
 
-![Cross-validation model comparison](assets/figures/model_diagnostics.png)
+![Comparação dos modelos na validação cruzada](assets/figures/model_diagnostics.png)
 
-### Key Findings
+### Principais Conclusões
 
-CatBoost consistently outperformed the other evaluated models during cross-validation and substantially improved upon the persistence baseline on the held-out test set.
+O CatBoost superou consistentemente os demais modelos avaliados durante a validação cruzada e apresentou uma melhoria substancial em relação ao modelo de persistência no conjunto de teste reservado.
 
-These results demonstrate the predictive value of combining historical temperature readings with engineered process features derived from heating operations and material additions.
+Esses resultados demonstram o valor preditivo da combinação de medições históricas de temperatura com atributos derivados de operações de aquecimento e adições de materiais.
 
-However, the results reflect performance on historical data. Real-world deployment would require further validation of feature availability at prediction time, operational reliability, and generalization to future production conditions.
+No entanto, os resultados refletem o desempenho em dados históricos. Uma implantação em condições reais exigiria validações adicionais da disponibilidade dos atributos no momento da previsão, da confiabilidade operacional e da capacidade de generalização para condições futuras de produção.
 
-### Potential Operational Impact
+### Potencial Impacto Operacional
 
-The proposed model could serve as a virtual temperature sensor during secondary steel refining, providing temperature estimates based on previously recorded measurements and process events.
+O modelo proposto poderia funcionar como um sensor virtual de temperatura durante o refino secundário do aço, fornecendo estimativas de temperatura a partir de medições anteriores e eventos do processo.
 
-As an initial deployment strategy, the model should operate alongside conventional temperature measurements to validate its reliability under real operating conditions. Its application could subsequently be evaluated for process conditions adequately represented in the training data, particularly intervals containing electrode heating cycles.
+Como estratégia inicial de implantação, o modelo deveria operar em paralelo com as medições convencionais de temperatura, permitindo validar sua confiabilidade em condições reais de operação. Posteriormente, sua aplicação poderia ser avaliada em condições de processo adequadamente representadas nos dados de treinamento, especialmente nos intervalos que contêm ciclos de aquecimento por eletrodos.
 
-The historical dataset contains **15,907 temperature measurements across 3,216 steel batches**, averaging approximately **4.95 measurements per batch**.
+O conjunto de dados históricos contém **15.907 medições de temperatura em 3.216 lotes de aço**, com média de aproximadamente **4,95 medições por lote**.
 
-Under a hypothetical scenario in which one manual temperature measurement per batch could safely be replaced by a model-generated estimate, the number of manual measurements would decrease by approximately **20.2%**.
+Em um cenário hipotético no qual uma medição manual de temperatura por lote pudesse ser substituída com segurança por uma estimativa do modelo, o número de medições manuais seria reduzido em aproximadamente **20,2%**.
 
-Such a reduction could potentially improve operational efficiency and reduce measurement-related costs. However, the actual benefits cannot be quantified with the available data, as measurement costs, operational constraints, and the metallurgical consequences of replacing measurements are unknown.
+Essa redução poderia melhorar a eficiência operacional e diminuir os custos associados às medições. Entretanto, não é possível quantificar os benefícios reais com os dados disponíveis, pois não são conhecidos os custos das medições, as restrições operacionais nem as consequências metalúrgicas de sua substituição.
 
-Further validation would therefore be necessary before considering the model suitable for replacing conventional temperature measurements.
+Portanto, seriam necessárias validações adicionais antes de considerar o modelo adequado para substituir medições convencionais de temperatura.
 
-## Project Objectives
+## Objetivos do Projeto
 
-- Explore and evaluate the quality of industrial process data.
-- Investigate the relationships between heating operations, material additions, and steel temperature.
-- Engineer features that represent the events occurring between temperature measurements.
-- Train and tune multiple regression models.
-- Evaluate predictive performance using MAE and RMSE.
-- Compare model performance against baseline approaches.
-- Identify limitations and opportunities for further development.
+- Explorar e avaliar a qualidade dos dados de processos industriais.
+- Investigar as relações entre operações de aquecimento, adições de materiais e temperatura do aço.
+- Criar atributos que representem os eventos ocorridos entre medições de temperatura.
+- Treinar e ajustar múltiplos modelos de regressão.
+- Avaliar o desempenho preditivo utilizando MAE e RMSE.
+- Comparar o desempenho dos modelos com abordagens de referência (*baselines*).
+- Identificar limitações e oportunidades de desenvolvimento futuro.
 
-## Data
+## Dados
 
-The project uses seven datasets provided as part of the TripleTen Steelproof case study.
+O projeto utiliza sete conjuntos de dados fornecidos como parte do estudo de caso Steelproof da TripleTen.
 
-| Dataset | Description |
+| Conjunto de dados | Descrição |
 |---|---|
-| `data_arc_en.csv` | Electrode heating operations, including active and reactive power and heating timestamps. |
-| `data_bulk_en.csv` | Quantities of bulk materials added during refining. |
-| `data_bulk_time_en.csv` | Timestamps of bulk material additions. |
-| `data_gas_en.csv` | Gas consumption measurements. |
-| `data_temp_en.csv` | Steel temperature measurements and sampling timestamps. |
-| `data_wire_en.csv` | Quantities of wire materials added during refining. |
-| `data_wire_time_en.csv` | Timestamps of wire material additions. |
+| `data_arc_en.csv` | Operações de aquecimento por eletrodos, incluindo potência ativa, potência reativa e registros de data e hora do aquecimento. |
+| `data_bulk_en.csv` | Quantidades de materiais a granel adicionados durante o refino. |
+| `data_bulk_time_en.csv` | Registros de data e hora das adições de materiais a granel. |
+| `data_gas_en.csv` | Medições de consumo de gás. |
+| `data_temp_en.csv` | Medições de temperatura do aço e respectivos registros de data e hora. |
+| `data_wire_en.csv` | Quantidades de materiais em fio adicionados durante o refino. |
+| `data_wire_time_en.csv` | Registros de data e hora das adições de materiais em fio. |
 
-The datasets describe different aspects of the refining process and are linked through batch identifiers.
+Os conjuntos de dados descrevem diferentes aspectos do processo de refino e estão relacionados por meio de identificadores de lote.
 
-### Data Preparation and Feature Engineering
+### Preparação dos Dados e Engenharia de Atributos
 
-A central challenge is that the datasets record different types of events at different times.
+Um dos principais desafios é que os conjuntos de dados registram diferentes tipos de eventos em momentos distintos.
 
-Rather than treating each batch as a single observation, the project organizes the data into intervals between consecutive temperature measurements.
+Em vez de tratar cada lote como uma única observação, o projeto organiza os dados em intervalos entre medições consecutivas de temperatura.
 
-Process events occurring within each interval are used to construct features for predicting the subsequent temperature.
+Os eventos do processo ocorridos dentro de cada intervalo são utilizados para construir atributos que permitem prever a temperatura subsequente.
 
-Engineered features include:
+Os atributos criados incluem:
 
-- Previous temperature measurement.
-- Time elapsed between temperature measurements.
-- Number and duration of electrode heating cycles.
-- Active and reactive power measurements.
-- Quantities of bulk and wire materials added.
-- Timing of process events relative to temperature measurements.
+- Medição anterior de temperatura.
+- Tempo decorrido entre medições de temperatura.
+- Quantidade e duração dos ciclos de aquecimento por eletrodos.
+- Medições de potência ativa e reativa.
+- Quantidades de materiais a granel e em fio adicionados.
+- Momento dos eventos do processo em relação às medições de temperatura.
 
-The datasets undergo exploratory analysis, validation, cleaning, and transformation before modeling.
+Antes da modelagem, os conjuntos de dados passam por análise exploratória, validação, limpeza e transformação.
 
-Gas consumption is not included in the interval-level predictors because the available records do not provide the timestamps necessary to associate consumption with individual intervals.
+O consumo de gás não é incluído entre os atributos de cada intervalo, pois os registros disponíveis não contêm as informações temporais necessárias para associar o consumo a intervalos individuais.
 
-## Modeling and Evaluation
+## Modelagem e Avaliação
 
-The project investigates several regression algorithms:
+O projeto investiga diversos algoritmos de regressão:
 
-- **DummyRegressor** — baseline based on a simple prediction strategy.
-- **Persistence model** — baseline using the previous temperature measurement.
-- **Ridge Regression** — regularized linear regression.
-- **LightGBM** — gradient-boosted decision trees.
-- **CatBoost** — gradient-boosted decision trees.
+- **DummyRegressor** — modelo de referência baseado em uma estratégia simples de previsão.
+- **Modelo de persistência** — modelo de referência que utiliza a medição anterior de temperatura.
+- **Regressão Ridge** — regressão linear regularizada.
+- **RandomForestRegressor** - regressão com florestas aleatórias.
+- **LightGBM** — árvores de decisão com *gradient boosting*.
+- **CatBoost** — árvores de decisão com *gradient boosting*.
 
-Model development includes cross-validation, hyperparameter tuning, and evaluation on held-out data.
+O desenvolvimento dos modelos inclui validação cruzada, ajuste de hiperparâmetros e avaliação em dados reservados para teste.
 
-The primary evaluation metrics are:
+As principais métricas de avaliação são:
 
-- **MAE (Mean Absolute Error):** Average absolute difference between predicted and observed temperatures.
-- **RMSE (Root Mean Squared Error):** A metric that places greater emphasis on larger prediction errors.
+- **MAE (erro absoluto médio):** média das diferenças absolutas entre as temperaturas previstas e observadas.
+- **RMSE (raiz do erro quadrático médio):** métrica que atribui maior peso a erros de previsão maiores.
 
-The project also examines prediction distributions, actual-versus-predicted temperatures, and model comparisons.
+O projeto também examina as distribuições das previsões, a relação entre temperaturas reais e previstas e as comparações entre modelos.
 
-Detailed experimental results and conclusions are presented in the notebooks.
+Os resultados experimentais detalhados e as conclusões são apresentados nos notebooks.
 
-## Repository Structure
+## Estrutura do Repositório
 
 ```text
 TT-Sprint17-FINAL-PROJECT/
 ├── README.md
+├── README.pt-BR.md
 ├── environment.yaml
 ├── assets/
 │   └── figures/
@@ -148,75 +152,74 @@ TT-Sprint17-FINAL-PROJECT/
     └── 03_steelproof_notebook_report.ipynb
 ```
 
-The notebooks use relative paths based on the project structure, avoiding dependencies on machine-specific file locations.
+Os notebooks utilizam caminhos relativos com base na estrutura do projeto, evitando dependências de diretórios específicos de uma máquina.
 
-## Environment Setup
+## Configuração do Ambiente
 
-The project uses Conda to manage Python and its dependencies.
+O projeto utiliza Conda para gerenciar o Python e suas dependências.
 
-### Prerequisites
+### Pré-requisitos
 
-- Conda (Miniconda, Anaconda, or equivalent).
-- A Jupyter-compatible environment, such as VS Code with the Jupyter extension or JupyterLab.
+- Conda (Miniconda, Anaconda ou equivalente).
+- Um ambiente compatível com Jupyter, como VS Code com a extensão Jupyter ou JupyterLab.
 
-### 1. Create and activate the project environment
+### 1. Criar e ativar o ambiente do projeto
 
-From the repository root directory:
+No diretório raiz do repositório, execute:
 
 ```bash
 conda env create -n steelproof -f environment.yaml
 conda activate steelproof
 ```
 
-The environment name `steelproof` can be replaced with any preferred name.
+O nome `steelproof` pode ser substituído por outro de sua preferência.
 
-The required Python dependencies are specified in `environment.yaml`, including `ipykernel`.
+As dependências Python necessárias estão especificadas em `environment.yaml`, incluindo `ipykernel`.
 
-### 2. Access the notebooks
+### 2. Acessar os notebooks
 
-The project is organized into three notebooks, intended to be read in the following order:
+O projeto está organizado em três notebooks, que devem ser lidos na seguinte ordem:
 
-**01 — Work Plan**
+**01 — Plano de Trabalho**
 
 `notebooks/01_steelproof_notebook_work_plan.ipynb`
 
-Introduces the business problem, explores the available datasets, investigates preliminary data characteristics, and establishes the proposed methodology and experimental design.
+Apresenta o problema de negócio, explora os conjuntos de dados disponíveis, investiga características preliminares dos dados e estabelece a metodologia e o planejamento experimental propostos.
 
-**02 — Data Processing and Modeling**
+**02 — Processamento de Dados e Modelagem**
 
 `notebooks/02_steelproof_notebook_code.ipynb`
 
-Contains the main implementation, including data cleaning, interval construction, feature engineering, regression modeling, hyperparameter optimization, and evaluation.
+Contém a implementação principal, incluindo limpeza de dados, construção de intervalos, engenharia de atributos, modelagem de regressão, otimização de hiperparâmetros e avaliação.
 
-**03 — Final Report**
+**03 — Relatório Final**
 
 `notebooks/03_steelproof_notebook_report.ipynb`
 
-Presents the experimental results, model comparisons, findings, limitations, and recommendations.
+Apresenta os resultados experimentais, as comparações entre modelos, as conclusões, as limitações e as recomendações.
 
-### 3. Running the notebooks in VS Code
+### 3. Executar os notebooks no VS Code
 
-1. Open the repository folder in VS Code.
-2. If using Windows with WSL, open the folder in a WSL session.
-3. Open the desired notebook.
-4. Select the Jupyter kernel associated with the `steelproof` Conda environment.
-5. Execute the notebook cells in order.
+1. Abra a pasta do repositório no VS Code.
+2. Se estiver utilizando Windows com WSL, abra a pasta em uma sessão WSL.
+3. Abra o notebook desejado.
+4. Selecione o kernel Jupyter associado ao ambiente Conda `steelproof`.
+5. Execute as células do notebook em ordem.
 
-**Note:** VS Code generally detects Conda environments directly. Manual kernel registration using `python -m ipykernel install` is typically unnecessary if `ipykernel` is already installed in the selected environment.
+**Observação:** O VS Code geralmente detecta ambientes Conda diretamente. O registro manual do kernel por meio de `python -m ipykernel install` normalmente é desnecessário se o pacote `ipykernel` já estiver instalado no ambiente selecionado.
 
-Other Jupyter-compatible environments can also be used.
+Também é possível utilizar outros ambientes compatíveis com Jupyter.
 
-## Project Scope and Limitations
+## Escopo e Limitações do Projeto
 
-This project represents an exploratory machine learning solution developed using historical industrial process data.
+Este projeto representa uma solução exploratória de aprendizado de máquina desenvolvida a partir de dados históricos de um processo industrial.
 
-The model is intended to estimate subsequent temperatures based on observed process conditions within the scope of the available data.
+O modelo tem como objetivo estimar temperaturas subsequentes com base nas condições observadas do processo, dentro do escopo dos dados disponíveis.
 
-It is not presented as a validated production-ready control system. Deployment would require further investigation into measurement reliability, real-time feature availability, generalization to unseen operating conditions, and integration with industrial process controls.
+Ele não é apresentado como um sistema de controle pronto para uso em produção. Uma implantação exigiria investigações adicionais sobre a confiabilidade das medições, a disponibilidade dos atributos em tempo real, a capacidade de generalização para condições operacionais não observadas e a integração com os sistemas de controle industrial.
 
-## Author
+## Autor
 
-Developed by **Daniel Endless** as the final project
-of the TripleTen Data Science Bootcamp.
+Desenvolvido por **Daniel Endless** como projeto final do Bootcamp de Ciência de Dados da TripleTen.
 
-[GitHub Profile](https://github.com/danendless)
+[Perfil no GitHub](https://github.com/danendless)

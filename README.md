@@ -113,6 +113,7 @@ The project investigates several regression algorithms:
 - **DummyRegressor** — baseline based on a simple prediction strategy.
 - **Persistence model** — baseline using the previous temperature measurement.
 - **Ridge Regression** — regularized linear regression.
+- **RandomForestRegressor** - tree ensemble regression.
 - **LightGBM** — gradient-boosted decision trees.
 - **CatBoost** — gradient-boosted decision trees.
 
