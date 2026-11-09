@@ -35,7 +35,7 @@ No conjunto de teste reservado, o CatBoost obteve MAE de **3,93 °C** e RMSE de 
 
 ### Temperaturas Reais vs. Previstas e Comparação dos Modelos na Validação Cruzada
 
-![Comparação dos modelos na validação cruzada](assets/figures/model_diagnostics.png)
+![Comparação dos modelos na validação cruzada](assets/figures/model_diagnostics.pt-BR.png)
 
 ### Principais Conclusões
 

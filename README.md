@@ -35,7 +35,7 @@ On the held-out test set, CatBoost achieved an MAE of **3.93 °C** and an RMSE o
 
 ### Actual vs. Predicted Temperatures and Cross-Validation Model Comparison
 
-![Cross-validation model comparison](assets/figures/model_diagnostics.png)
+![Cross-validation model comparison](assets/figures/model_diagnostics.en.png)
 
 ### Key Findings
 
