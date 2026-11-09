@@ -133,22 +133,34 @@ Detailed experimental results and conclusions are presented in the notebooks.
 ```text
 TT-Sprint17-FINAL-PROJECT/
 ├── README.md
-├── environment.yaml
+├── README.pt-BR.md
+├── environment.yml
+├── .gitignore
 ├── assets/
 │   └── figures/
-│       └── model_diagnostics.png
+│       ├── model_diagnostics.en.png
+│       └── model_diagnostics.pt-BR.png
 ├── data/
-│   ├── data_arc_en.csv
-│   ├── data_bulk_en.csv
-│   ├── data_bulk_time_en.csv
-│   ├── data_gas_en.csv
-│   ├── data_temp_en.csv
-│   ├── data_wire_en.csv
-│   └── data_wire_time_en.csv
-└── notebooks/
-    ├── 01_steelproof_notebook_work_plan.ipynb
-    ├── 02_steelproof_notebook_code.ipynb
-    └── 03_steelproof_notebook_report.ipynb
+│   └── final_steel_en/
+│       ├── data_arc_en.csv
+│       ├── data_bulk_en.csv
+│       ├── data_bulk_time_en.csv
+│       ├── data_gas_en.csv
+│       ├── data_temp_en.csv
+│       ├── data_wire_en.csv
+│       └── data_wire_time_en.csv
+├── notebooks/
+│   ├── English/
+│   │   ├── 01_steelproof_notebook_work_plan.en.ipynb
+│   │   ├── 02_steelproof_notebook_code.en.ipynb
+│   │   └── 03_steelproof_notebook_report.en.ipynb
+│   └── Portuguese/
+│       ├── 01_steelproof_notebook_work_plan.pt-BR.ipynb
+│       ├── 02_steelproof_notebook_code.pt-BR.ipynb
+│       └── 03_steelproof_notebook_report.pt-BR.ipynb
+└── results/
+    ├── comparison_df.csv
+    └── test_diagnostics.csv
 ```
 
 The notebooks use relative paths based on the project structure, avoiding dependencies on machine-specific file locations.
@@ -181,19 +193,19 @@ The project is organized into three notebooks, intended to be read in the follow
 
 **01 — Work Plan**
 
-`notebooks/01_steelproof_notebook_work_plan.ipynb`
+`notebooks/{language}/01_steelproof_notebook_work_plan.{language}.ipynb`
 
 Introduces the business problem, explores the available datasets, investigates preliminary data characteristics, and establishes the proposed methodology and experimental design.
 
 **02 — Data Processing and Modeling**
 
-`notebooks/02_steelproof_notebook_code.ipynb`
+`notebooks/{language}/02_steelproof_notebook_code.{language}.ipynb`
 
 Contains the main implementation, including data cleaning, interval construction, feature engineering, regression modeling, hyperparameter optimization, and evaluation.
 
 **03 — Final Report**
 
-`notebooks/03_steelproof_notebook_report.ipynb`
+`notebooks/{language}/03_steelproof_notebook_report.{language}.ipynb`
 
 Presents the experimental results, model comparisons, findings, limitations, and recommendations.
 

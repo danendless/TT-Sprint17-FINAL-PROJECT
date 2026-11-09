@@ -134,22 +134,33 @@ Os resultados experimentais detalhados e as conclusões são apresentados nos no
 TT-Sprint17-FINAL-PROJECT/
 ├── README.md
 ├── README.pt-BR.md
-├── environment.yaml
+├── environment.yml
+├── .gitignore
 ├── assets/
 │   └── figures/
-│       └── model_diagnostics.png
+│       ├── model_diagnostics.en.png
+│       └── model_diagnostics.pt-BR.png
 ├── data/
-│   ├── data_arc_en.csv
-│   ├── data_bulk_en.csv
-│   ├── data_bulk_time_en.csv
-│   ├── data_gas_en.csv
-│   ├── data_temp_en.csv
-│   ├── data_wire_en.csv
-│   └── data_wire_time_en.csv
-└── notebooks/
-    ├── 01_steelproof_notebook_work_plan.ipynb
-    ├── 02_steelproof_notebook_code.ipynb
-    └── 03_steelproof_notebook_report.ipynb
+│   └── final_steel_en/
+│       ├── data_arc_en.csv
+│       ├── data_bulk_en.csv
+│       ├── data_bulk_time_en.csv
+│       ├── data_gas_en.csv
+│       ├── data_temp_en.csv
+│       ├── data_wire_en.csv
+│       └── data_wire_time_en.csv
+├── notebooks/
+│   ├── English/
+│   │   ├── 01_steelproof_notebook_work_plan.en.ipynb
+│   │   ├── 02_steelproof_notebook_code.en.ipynb
+│   │   └── 03_steelproof_notebook_report.en.ipynb
+│   └── Portuguese/
+│       ├── 01_steelproof_notebook_work_plan.pt-BR.ipynb
+│       ├── 02_steelproof_notebook_code.pt-BR.ipynb
+│       └── 03_steelproof_notebook_report.pt-BR.ipynb
+└── results/
+    ├── comparison_df.csv
+    └── test_diagnostics.csv
 ```
 
 Os notebooks utilizam caminhos relativos com base na estrutura do projeto, evitando dependências de diretórios específicos de uma máquina.
@@ -182,19 +193,19 @@ O projeto está organizado em três notebooks, que devem ser lidos na seguinte o
 
 **01 — Plano de Trabalho**
 
-`notebooks/01_steelproof_notebook_work_plan.ipynb`
+`notebooks/{idioma}/01_steelproof_notebook_work_plan.{idioma}.ipynb`
 
 Apresenta o problema de negócio, explora os conjuntos de dados disponíveis, investiga características preliminares dos dados e estabelece a metodologia e o planejamento experimental propostos.
 
 **02 — Processamento de Dados e Modelagem**
 
-`notebooks/02_steelproof_notebook_code.ipynb`
+`notebooks/{idioma}/02_steelproof_notebook_code.{idioma}.ipynb`
 
 Contém a implementação principal, incluindo limpeza de dados, construção de intervalos, engenharia de atributos, modelagem de regressão, otimização de hiperparâmetros e avaliação.
 
 **03 — Relatório Final**
 
-`notebooks/03_steelproof_notebook_report.ipynb`
+`notebooks/{idioma}/03_steelproof_notebook_report.{idioma}.ipynb`
 
 Apresenta os resultados experimentais, as comparações entre modelos, as conclusões, as limitações e as recomendações.
 
